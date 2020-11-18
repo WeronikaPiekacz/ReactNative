@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { render } from 'react-dom';
-import { Platform, StyleSheet, Text, View , FlatList} from 'react-native';
+import { Platform, StyleSheet, Text, View , FlatList, AsyncStorage} from 'react-native';
 import Header from './Components/Header'
 import InputBar from './Components/InputBar'
 import ToDoItem from './Components/ToDoItem'
@@ -12,8 +12,8 @@ export default class App extends React.Component {
     this.state = {
       todoInput: '',
       todos: [
-        {id: 0, title: 'Dupa1', done: false},
-        {id: 1, title: 'Dupa2', done: true}
+        {id: 0, title: 'First Task', done: false},
+        {id: 1, title: 'Second Task', done: true}
       ]
     }
   }
@@ -30,7 +30,7 @@ export default class App extends React.Component {
       todos: todos,
       todoInput: ''
     });
-    
+
   }
   toggleDone(item) {
     let todos= this.state.todos;
@@ -61,6 +61,7 @@ export default class App extends React.Component {
           <InputBar 
             textChange={todoInput => this.setState({todoInput})}
             addNewToDo={() => this.addNewToDo()}
+            todoInput={this.state.todoInput}
           />
           <FlatList 
             data={this.state.todos}
